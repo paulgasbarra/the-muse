@@ -1,5 +1,7 @@
-.container {
-    display: block;
-    width: 100%;
-    text-align: center;
+.job_container {
+    padding: 1rem;
+}
+
+.search_body {
+    display: flex;
 }

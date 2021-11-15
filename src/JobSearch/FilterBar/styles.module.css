@@ -1,3 +1,4 @@
 .filter_bar {
-    border: white solid 2px;
+    text-align: left;
+    flex: 25%;
 }
