@@ -6,7 +6,7 @@ Run `yarn install`
 
 You may have to install the typescript libraries as well. 
 
-### `yarn start`
+Run `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
