@@ -7,7 +7,6 @@ interface ResultsListProps {
 }
 
 const ResultsList: FC<ResultsListProps> = ({filteredSearchResults}) => {
-    //console.log(filteredSearchResults)
     return (
         <div className={styles.results_list}>
         {filteredSearchResults && filteredSearchResults.map((result:any) => 

@@ -30,20 +30,19 @@ const JobSearchContainer: FC = () => {
 
     useEffect(() => {
         const filteredResults = searchResults.map(jobListing => {
-            filters.forEach(filter => jobListing[filter.category][filter.filter_property] == filter.value)
+            return filters.forEach(filter => jobListing[filter.category][filter.filter_property] === parseInt(filter.value))
         })
-        console.log('filteredResults', filteredResults)
-        // setFilteredSearchResults(filteredResults)
-    }, [filters])
+        //setFilteredSearchResults(filteredResults)
+    }, [filters, searchResults])
     
     const runSearch = (searchTerm: string) => {
-        const apiKey = 'cb00038c45ba64fa1b75b82dfd713cfe41684bec8b4595044266496bc4edd2c0';
+        setFilterCriteria([])
         //search by string
-        axios.get('https://www.themuse.com/api/public/jobs?page=1')
+        axios.get(`https://www.themuse.com/api/public/jobs?page=1`)
                 .then((res) => {
                 setSearchResults(res.data.results)
                 setFilteredSearchResults(res.data.results)
-                buildFilters(res.data.results)    
+                buildFilters(res.data.results)  
             })
                 .catch((error) => {
                 console.error(error)
@@ -56,13 +55,12 @@ const JobSearchContainer: FC = () => {
     }
 
     const buildFilters = (jobListings:JobListings) => {
-        setFilters([...filters, {category: 'company', filter_property: 'id', value: '11802'}])
         const companies = jobListings.map(listing => {
             return {'name': listing.company.name, 'id':listing.company.id, 'category': 'company', "updateFilter" : updateFilters}
         })
         const uniqueCompanies = companies.filter((company, index, self) => index === self.findIndex((c) => c.id === company.id)).sort((a: any,b: any) => {return a.name - b.name})
         const sortedCompanies = uniqueCompanies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-        setFilterCriteria([...filterCriteria, {name: 'by Company', items: sortedCompanies}])
+        setFilterCriteria([ {name: 'by Company', items: sortedCompanies}])
     };
 
     return (
